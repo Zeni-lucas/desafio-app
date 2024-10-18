@@ -22,22 +22,22 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "created_at" => "nullable"| "date",
-            "updated_at" => "nullable"| "date",
+           "created_at" => "nullable|date",
+            "updated_at" => "nullable|date",
 
-            "products" => "required"| "array",
-            "products.*.name" => "required"| "string",
-            "products.*.quantity" => "required"| "integer",
-            "products.*.valor" => "required"| "numeric",
+            "products" => "required|array",
+            "products.*.name" => "required|string",
+            "products.*.quantity" => "required|integer",
+            "products.*.valor" => "required|numeric",
 
-            "users" => "required"| "array",
-            "users.*.name" => "required"| "string",
-            "users.*.email" => "required"| "string",
-            "users.*.birthday" => "required"| "date",
+            "users" => "required|array",
+            "users.*.name" => "required|string",
+            "users.*.email" => "required|string",
+            "users.*.birthday" => "required|date",
 
-            "payment_method" => "required"| "in:CREDIT, DEBIT, MONEY",
+            "payment_method" => "required|in:CREDIT, DEBIT, MONEY",
 
-            "blocked" => "required"| "boolean",
+            "blocked" => "required|boolean",
         ];
     }
 }

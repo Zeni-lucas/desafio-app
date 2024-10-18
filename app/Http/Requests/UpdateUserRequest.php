@@ -22,11 +22,11 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required"|"string",
-            "email" => "required"| "string",
-            "bithday" => "required"| "date",
-            "created_at" => "nullable"| "date",
-            "updated_at" => "nullable"| "date",
+            "name" => "required|string",
+            "email" => "required|string",
+            "bithday" => "required|date",
+            "created_at" => "nullable|date",
+            "updated_at" => "nullable|date",
         ];
     }
 }
