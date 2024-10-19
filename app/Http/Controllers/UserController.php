@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json($user, 200);
     }
 
     /**
@@ -24,8 +25,19 @@ class UserController extends Controller
     {   
         
         $data = $request->validated();
+
+        $birthday = Carbon::parse($data['birthday']);
+        $age = $birthday->age;
+        
+        if ($age < 18) {
+            return response()->json([
+                'error' => "You must be at least 18 years old to create an account."
+            ], 403);
+        }
+    
+        
         $user = User::create($data);
-        return response()->json($user);
+        return response()->json($user, 201);
     }
 
     /**
@@ -52,7 +64,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if($user->transactions()->exists() || $user->transactionsProducts()->exists()){
+            return response()->json([
+                'error' => "Cannot delete user with existing transactions or balance"
+            ]);
+        }
+
         $user->delete();
-        return "User Removed";
+
+        return response()->json([
+            'Message' => "User deleted Successfully!"
+        ]);
     }
 }

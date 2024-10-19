@@ -35,6 +35,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function transactionProducts(){
+        return $this->hasMany(transactionProduct::class);
+    }
 
     /**
      * Get the attributes that should be cast.
