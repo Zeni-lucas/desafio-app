@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations.s
      */
     public function up(): void
     {
+
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('name');
             $table->integer('quantity')->default(0);
             $table->decimal('valor', 10,2);
             $table->timestamps();

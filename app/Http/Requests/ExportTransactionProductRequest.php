@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTransactionRequest extends FormRequest
+class ExportTransactionProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,9 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            "user_id" => "required|exists:users,id",
-            
-            "payment_method" => "required|in:CREDIT,DEBIT,MONEY",
-            "blocked" => "required|boolean",
-            "products" => "required|array",
-            "products.*.product_id" => "required|exists:products,id",
-            "products.*.quantity" => "required|integer|min:1",
+            'filter' => 'required|in:last-30-days,month-year,all', 
+            'month' => 'required_if:filter,month-year|integer|min:1|max:12', 
+            'year' => 'required_if:filter,month-year|integer|min:1900|max:2100',
         ];
     }
 }

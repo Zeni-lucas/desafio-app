@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
+use App\Models\TransactionProduct;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,7 +15,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Transaction::all(),200);
     }
 
     /**
@@ -23,8 +24,21 @@ class TransactionController extends Controller
     public function store(StoreTransactionRequest $request)
     {
         $data = $request->validated();
-        Transaction::create($data);
-        return response()->json($data);
+
+        $transaction = Transaction::create([
+            'user_id' => $data['user_id'],
+            'payment_method' => $data['payment_method'],
+            'blocked' => $data['blocked'],
+        ]);
+
+        foreach ($data['products'] as $product){
+            TransactionProduct::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $product['product_id'],
+                'amount' => $product['quantity'],
+            ]);
+        }
+        return response()->json($transaction->load('transactionProduct.product'),201);
     }
 
     /**
@@ -52,4 +66,6 @@ class TransactionController extends Controller
         $transaction->delete();
         return "Transaction Removed";
     }
+
+    
 }

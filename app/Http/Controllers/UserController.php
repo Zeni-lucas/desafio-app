@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json($user, 200);
+        return response()->json(User::orderby('created_at', 'desc')->get(), 200);
     }
 
     /**
@@ -45,9 +45,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {   
-        $data = $user->posts()->orderBy('created_at', 'asc')->get();
-
-        return response()->json($data);
+        return response()->json($user);
     }
 
     /**

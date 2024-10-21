@@ -20,7 +20,7 @@ class Transaction extends Model
     }
 
     public function transactionProduct(){
-        return $this->hasMany(transactionProduct::class);
+        return $this->hasMany(TransactionProduct::class);
     }
 
     const PAYMENT_METHODS = [
@@ -38,6 +38,7 @@ class Transaction extends Model
     {
         return [
             'payment_method' => 'string',
+            'blocked' => 'boolean',
 
         ];
     }

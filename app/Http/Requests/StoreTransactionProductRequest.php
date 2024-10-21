@@ -24,7 +24,9 @@ class StoreTransactionProductRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'product_id' => 'required|integer|exists:products,id',
+            "payment_method" => "required|in:CREDIT,DEBIT,MONEY",
             'amount'=> 'required|integer|min:1',
+            "blocked" => "required|boolean",
         ];
     }
 }

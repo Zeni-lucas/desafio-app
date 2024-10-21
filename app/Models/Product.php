@@ -12,10 +12,10 @@ class Product extends Model
    protected $fillable = [
       'name',
       'quantity',
-      'amount'
+      'valor'
    ];
 
    public function transactionProduct(){
-      $this->hasMany(transactionProduct::class);
+      return $this->hasMany(transactionProduct::class);
    }
 }
