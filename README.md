@@ -71,6 +71,10 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
 ## Passos para Configuração
 
+## Postman Collection(DOCUMENTACAO DAS APIS)
+### Link direto para a collection
+https://elements.getpostman.com/redirect?entityId=39097446-aabbb79d-9852-4286-b11b-7a5bbf59bede&entityType=collection
+
 # Como executar o script
 
 Você pode usar o seguinte script Bash para automatizar parte da configuração do projeto:
